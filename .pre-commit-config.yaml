@@ -3,3 +3,5 @@ repos:
     rev: 3.8.4
     hooks:
       - id: flake8
+        files: 'backend'
+        args: [--max-line-length=119]
