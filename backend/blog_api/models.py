@@ -1,6 +1,5 @@
 from django.db import models
-from django.utils import timezone
-#from django.conf import settings
+from django.conf import settings
 from .managers import PublishedManager
 
 
@@ -16,10 +15,10 @@ class Post(models.Model):
         ('draft', 'Draft'),
         ('published', 'Published'),
     )
-    #author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name='posts')
-    tag = models.ForeignKey(Tag, on_delete=models.PROTECT, null=True, blank=True)
     title = models.CharField(max_length=255)
-    body = models.TextField(default=timezone.now)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts')
+    body = models.TextField()
+    tag = models.ForeignKey(Tag, on_delete=models.PROTECT, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     published_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
