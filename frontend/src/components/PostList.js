@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -23,7 +24,8 @@ function PostList() {
             <div className="card-body">
                 <h5 className="card-title">{post.title}</h5>
                 <p className="card-text">{post.body}</p>
-                {/*<a href="#" className="btn btn-primary">Go somewhere</a>*/}
+               {/* <a className="btn btn-primary" href={post.id}>View</a>*/}
+               <Link className="btn btn-primary" to={`/posts/${post.slug}`}>Read</Link>
             </div>
             </div>
         ))}
