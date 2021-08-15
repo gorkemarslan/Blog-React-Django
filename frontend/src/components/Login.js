@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import axios from 'axios';
 
 function Login() {
     const [formData, setFormData] = useState({
@@ -15,14 +16,33 @@ function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData);
+        login(formData.email, formData.password)
     }
+
+    const login = (email, password) => {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+      
+      const body = JSON.stringify({email, password});
+      
+      axios.post('http://127.0.0.1:8000/auth/jwt/create/', body, config)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    }
+
     return (
         <div>
         <form onSubmit={handleSubmit} className="form-signup">
           {/*</form><img className="mb-4" src="../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">*/}
-          <h1 className="h3 mb-3 font-weight-normal">Sign In</h1>
-          <label className="sr-only">
+          <h1 className="h3 mb-3 font-weight-normal">Log In</h1>
+          <label>
             Email
           </label>
           <input
@@ -30,12 +50,12 @@ function Login() {
             type="email"
             id="email"
             name="email"
-            className="form-control"
+            className="form-control mb-3"
             placeholder="Email Address"
             required
             autoFocus
           />
-          <label className="sr-only">
+          <label>
             Password
           </label>
           <input
@@ -43,13 +63,13 @@ function Login() {
             type="password"
             id="password"
             name="password"
-            className="form-control"
+            className="form-control mb-3"
             placeholder="Password"
             required
             autoFocus
           />
           <button className="btn btn-lg btn-primary btn-block" type="submit">
-            Sign in
+            Log In
           </button>
         </form>
       </div>
