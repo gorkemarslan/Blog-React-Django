@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -17,17 +18,40 @@ function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    signup(
+       formData.first_name,
+       formData.last_name,
+       formData.email,
+       formData.password,
+    );
   };
+
+  const signup =
+    (first_name, last_name, email, password) =>  {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const body = JSON.stringify({first_name, last_name, email, password});
+      try {
+        const response = axios.post(
+          "http://127.0.0.1:8000/auth/users/",
+          body,
+          config
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
 
   return (
     <div>
       <form onSubmit={handleSubmit} className="form-signup">
         {/*</form><img className="mb-4" src="../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">*/}
         <h1 className="h2 mb-3 font-weight-normal">Sign Up</h1>
-        <label>
-          First Name
-        </label>
+        <label>First Name</label>
         <input
           onChange={handleChange}
           type="text"
@@ -38,9 +62,7 @@ function Signup() {
           required
           autoFocus
         />
-        <label>
-          Last Name
-        </label>
+        <label>Last Name</label>
         <input
           onChange={handleChange}
           type="text"
@@ -51,9 +73,7 @@ function Signup() {
           required
           autoFocus
         />
-        <label>
-          Email Address
-        </label>
+        <label>Email Address</label>
         <input
           onChange={handleChange}
           type="email"
@@ -64,9 +84,7 @@ function Signup() {
           required
           autoFocus
         />
-        <label>
-          Password
-        </label>
+        <label>Password</label>
         <input
           onChange={handleChange}
           type="password"
