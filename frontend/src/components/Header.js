@@ -1,9 +1,36 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser, faSignInAlt } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faSignInAlt } from "@fortawesome/free-solid-svg-icons";
+import store from '../store';
+import { connect } from 'react-redux';
 
-function Header() {
+function Header({ isAuthenticated }) {
+  const navbarForAnonymousUsers = () => (
+    <Fragment>
+      <li className="nav-item">
+        <Link className="nav-link" to="/register">
+          <FontAwesomeIcon icon={faUser} /> Sign Up
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link className="nav-link" to="/login">
+          <FontAwesomeIcon icon={faSignInAlt} /> Login
+        </Link>
+      </li>
+    </Fragment>
+  );
+
+  const navbarForAuthrnticatedUsers = () => {
+    <Fragment>
+      <li className="nav-item">
+        <Link className="nav-link" href="#!">
+           Logout
+        </Link>
+      </li>
+    </Fragment>;
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -61,22 +88,16 @@ function Header() {
             </li>
           </ul>
           <ul className="nav navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link className="nav-link" to="/register">
-                <FontAwesomeIcon icon={faUser} /> Sign Up
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/login">
-                <FontAwesomeIcon icon={faSignInAlt} /> Login
-              </Link>
-            </li>
+            { isAuthenticated ? navbarForAuthrnticatedUsers() : navbarForAnonymousUsers() }
           </ul>
-         
         </div>
       </nav>
     </div>
   );
-}
+};
 
-export default Header;
+const mapStateToProps = state => ({
+  isAuthenticated: state.isAuthenticated
+})
+
+export default connect(mapStateToProps)(Header);
