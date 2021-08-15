@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -24,8 +24,8 @@ function Signup() {
     <div>
       <form onSubmit={handleSubmit} className="form-signup">
         {/*</form><img className="mb-4" src="../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">*/}
-        <h1 className="h3 mb-3 font-weight-normal">Sign Up</h1>
-        <label for="inputFirstName" className="sr-only">
+        <h1 className="h2 mb-3 font-weight-normal">Sign Up</h1>
+        <label>
           First Name
         </label>
         <input
@@ -33,38 +33,38 @@ function Signup() {
           type="text"
           id="first_name"
           name="first_name"
-          className="form-control"
+          className="form-control mb-3"
           placeholder="First Name"
           required
-          autofocus
+          autoFocus
         />
-        <label for="inputLastName" className="sr-only">
-          First Name
+        <label>
+          Last Name
         </label>
         <input
           onChange={handleChange}
           type="text"
           id="last_name"
           name="last_name"
-          className="form-control"
+          className="form-control mb-3"
           placeholder="Last Name"
           required
-          autofocus
+          autoFocus
         />
-        <label for="password" className="sr-only">
-          Last Name
+        <label>
+          Email Address
         </label>
         <input
           onChange={handleChange}
           type="email"
           id="email"
           name="email"
-          className="form-control"
+          className="form-control mb-3"
           placeholder="Email Address"
           required
-          autofocus
+          autoFocus
         />
-        <label for="password" className="sr-only">
+        <label>
           Password
         </label>
         <input
@@ -72,12 +72,13 @@ function Signup() {
           type="password"
           id="password"
           name="password"
-          className="form-control"
+          className="form-control mb-3"
           placeholder="Password"
           required
+          autoFocus
         />
         <button className="btn btn-lg btn-primary btn-block" type="submit">
-          Sign in
+          Sign Up
         </button>
       </form>
     </div>
