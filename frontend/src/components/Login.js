@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import store from '../store';
 
 function Login() {
     const [formData, setFormData] = useState({
@@ -30,10 +31,15 @@ function Login() {
       
       axios.post('http://127.0.0.1:8000/auth/jwt/create/', body, config)
       .then((response) => {
-        console.log(response.data);
+        store.dispatch({
+          type: 'LOGIN_SUCCESS',
+          payload: response.data
+        })
       })
       .catch((error) => {
-        console.log(error);
+        store.dispatch({
+          type: 'LOGIN_FAIL'
+        })
       })
     }
 
