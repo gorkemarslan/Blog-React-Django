@@ -34,15 +34,18 @@ function Signup() {
         },
       };
       const body = JSON.stringify({first_name, last_name, email, password});
-      try {
-        const response = axios.post(
-          "http://127.0.0.1:8000/auth/users/",
-          body,
-          config
-        );
-      } catch (error) {
+      
+      axios.post(
+        "http://127.0.0.1:8000/auth/users/",
+        body,
+        config
+      )
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
         console.log(error);
-      }
+      })
     };
 
 
