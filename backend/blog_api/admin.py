@@ -7,7 +7,7 @@ class TagAdmin(admin.ModelAdmin):
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['title', 'tag', 'published_at', 'status']
+    list_display = ['title', 'author', 'tag', 'published_at', 'status']
     search_fields = ['title']
     ordering = ['published_at']
     prepopulated_fields = {'slug': ('title',)}
