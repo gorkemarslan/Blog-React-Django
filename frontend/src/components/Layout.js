@@ -7,7 +7,7 @@ import { verifyTokens } from '../redux/actions/actions';
 function Layout(props) {
     useEffect(() => {
         props.verifyTokens();
-    })
+    }, [])
     return (
         <div>
             <Header />
