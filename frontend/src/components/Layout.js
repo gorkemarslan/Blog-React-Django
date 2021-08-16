@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useEffect} from 'react'
+import { connect } from 'react-redux';
 import '../App.css';
 import Header from './Header';
+import { verifyTokens } from '../redux/actions/actions'; 
 
 function Layout(props) {
+    useEffect(() => {
+        props.verifyTokens();
+    })
     return (
         <div>
             <Header />
@@ -13,4 +18,4 @@ function Layout(props) {
     )
 }
 
-export default Layout
+export default connect(null, {verifyTokens})(Layout);

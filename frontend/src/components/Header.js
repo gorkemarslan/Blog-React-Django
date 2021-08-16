@@ -2,10 +2,10 @@ import React, { Fragment } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faSignInAlt } from "@fortawesome/free-solid-svg-icons";
-import store from '../store';
 import { connect } from 'react-redux';
+import { logout } from '../redux/actions/actions';
 
-function Header({ isAuthenticated }) {
+function Header({ logout, isAuthenticated }) {
   const navbarForAnonymousUsers = () => (
     <Fragment>
       <li className="nav-item">
@@ -24,7 +24,7 @@ function Header({ isAuthenticated }) {
   const navbarForAuthenticatedUsers = () => (
     <Fragment>
       <li className="nav-item">
-        <Link className="nav-link" href="/login">
+        <Link className="nav-link" onClick={logout} to="/">
            Logout
         </Link>
       </li>
@@ -100,4 +100,4 @@ const mapStateToProps = state => ({
   isAuthenticated: state.isAuthenticated
 })
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, { logout })(Header);

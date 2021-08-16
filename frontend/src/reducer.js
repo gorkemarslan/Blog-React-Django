@@ -6,6 +6,11 @@ const initialState = {
 
 function reducer(state = initialState, action) {
   switch (action.type) {
+    case "AUTHENTICATION_SUCCESS":
+        return {
+            ...state,
+            isAuthenticated: true,
+        };
     case "LOGIN_SUCCESS":
       localStorage.setItem("access", action.payload.access);
       localStorage.setItem("refresh", action.payload.refresh);
@@ -15,6 +20,8 @@ function reducer(state = initialState, action) {
         refresh: action.payload.refresh,
         isAuthenticated: true,
       };
+    case "AUTHENTICATION_FAIL":
+    case "LOGOUT":
     case "LOGIN_FAIL":
       localStorage.removeItem("access");
       localStorage.removeItem("refresh");

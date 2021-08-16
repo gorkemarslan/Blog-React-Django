@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import store from '../store';
+import { Redirect } from 'react-router-dom';
+import { login } from '../redux/actions/actions';
+import { connect } from 'react-redux';
 
-function Login() {
+function Login({ login, isAuthenticated }) {
+
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -17,30 +19,12 @@ function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(formData.email, formData.password)
         login(formData.email, formData.password)
     }
 
-    const login = (email, password) => {
-      const config = {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-      
-      const body = JSON.stringify({email, password});
-      
-      axios.post('http://127.0.0.1:8000/auth/jwt/create/', body, config)
-      .then((response) => {
-        store.dispatch({
-          type: 'LOGIN_SUCCESS',
-          payload: response.data
-        })
-      })
-      .catch((error) => {
-        store.dispatch({
-          type: 'LOGIN_FAIL'
-        })
-      })
+    if(isAuthenticated){
+      return <Redirect to="/" />
     }
 
     return (
@@ -82,4 +66,8 @@ function Login() {
     )
 }
 
-export default Login
+const mapStateToProps = state => ({
+  isAuthenticated: state.isAuthenticated
+});
+
+export default connect(mapStateToProps, { login })(Login);
