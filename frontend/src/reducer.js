@@ -1,7 +1,7 @@
 const initialState = {
   access: localStorage.getItem("access"),
   refresh: localStorage.getItem("refresh"),
-  isAuthenticated: null,
+  isAuthenticated: false,
 };
 
 function reducer(state = initialState, action) {
@@ -24,6 +24,8 @@ function reducer(state = initialState, action) {
         refresh: null,
         isAuthenticated: false,
       };
+    default:
+        return state;
   }
 }
 

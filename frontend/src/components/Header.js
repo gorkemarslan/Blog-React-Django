@@ -21,15 +21,15 @@ function Header({ isAuthenticated }) {
     </Fragment>
   );
 
-  const navbarForAuthrnticatedUsers = () => {
+  const navbarForAuthenticatedUsers = () => (
     <Fragment>
       <li className="nav-item">
-        <Link className="nav-link" href="#!">
+        <Link className="nav-link" href="/login">
            Logout
         </Link>
       </li>
-    </Fragment>;
-  };
+    </Fragment>
+  );
 
   return (
     <div>
@@ -88,7 +88,7 @@ function Header({ isAuthenticated }) {
             </li>
           </ul>
           <ul className="nav navbar-nav ml-auto">
-            { isAuthenticated ? navbarForAuthrnticatedUsers() : navbarForAnonymousUsers() }
+            { isAuthenticated ? navbarForAuthenticatedUsers() : navbarForAnonymousUsers() }
           </ul>
         </div>
       </nav>
