@@ -22,7 +22,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     published_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    slug = models.SlugField(max_length=127, unique_for_date='published_at')
+    slug = models.SlugField(max_length=127, unique_for_date='created_at')
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
 
     # Default Manager
@@ -31,7 +31,7 @@ class Post(models.Model):
     published = PublishedManager()
 
     class Meta:
-        ordering = ('-published_at',)
+        ordering = ('-created_at',)
 
     def __str__(self):
         return self.title
